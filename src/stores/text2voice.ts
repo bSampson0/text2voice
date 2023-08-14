@@ -45,7 +45,7 @@ export const useText2VoiceStore = defineStore('text2voice', () => {
         accept: 'audio/mpeg'
       },
       body: JSON.stringify({
-        text: value,
+        text: value.value,
         voice_settings: {
           stability: 0,
           similarity_boost: 0,
