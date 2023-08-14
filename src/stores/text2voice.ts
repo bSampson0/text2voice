@@ -36,7 +36,7 @@ export const useText2VoiceStore = defineStore('text2voice', () => {
   function text2voice() {
     isLoading.value = true
     downloadUrl.value = ''
-    const voiceUrl = `${BASE_URL}/${selectedVoice.value.voice_id}`
+    const voiceUrl = `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoice.value.voice_id}`
     fetch(voiceUrl, {
       method: 'POST',
       headers: {
