@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useText2VoiceStore } from '../stores/text2voice'
 import { onMounted } from 'vue'
+// import AudioPlayer from '../components/AudioPlayer.vue'
 
 const voiceStore = useText2VoiceStore()
 const {
@@ -63,10 +64,11 @@ onMounted(() => {
       >Generate</v-btn
     >
     <v-divider class="divide"></v-divider>
+    <p>{{ downloadUrl }}</p>
     <v-progress-circular v-if="isLoading" indeterminate color="primary"></v-progress-circular>
-    <div class="audio-player" v-if="downloadUrl != ''">
+    <!-- <div class="audio-player" v-if="downloadUrl != ''">
       <AudioPlayer color="transparent" :file="downloadUrl"></AudioPlayer>
-    </div>
+    </div> -->
   </v-container>
 </template>
 

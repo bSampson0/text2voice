@@ -11,13 +11,10 @@ export const useText2VoiceStore = defineStore('text2voice', () => {
   const voices = ref([])
   const selectedVoice = ref({} as HistoryItem)
   const showPlayer = ref(false)
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const API_KEY = import.meta.env.VITE_API_KEY
 
   function getVoices() {
-    fetch(
-      'https://api.elevenlabs.io/v1/shared-voices?page_size=101&sort=usage_character_count_7d&to_review=false'
-    )
+    fetch('https://api.elevenlabs.io/v1/voices')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Request failed')
@@ -34,6 +31,7 @@ export const useText2VoiceStore = defineStore('text2voice', () => {
   }
 
   function text2voice() {
+    console.log(selectedVoice.value)
     isLoading.value = true
     downloadUrl.value = ''
     const voiceUrl = `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoice.value.voice_id}`
@@ -62,8 +60,7 @@ export const useText2VoiceStore = defineStore('text2voice', () => {
       })
       .then((blob) => {
         const url = URL.createObjectURL(blob)
-        downloadUrl.value = url
-        downloadFilename.value = 'generated-audio.mp3'
+        window.open(url, 'download')
       })
       .catch((error) => {
         console.log(error)
